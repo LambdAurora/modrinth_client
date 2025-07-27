@@ -10,6 +10,7 @@ export interface ActionManifest {
 	readonly name: string;
 	readonly type: VersionType;
 	readonly changelog: string;
+	readonly feature: boolean;
 	readonly game_versions?: readonly string[];
 	readonly loaders: readonly string[];
 	readonly dependencies: readonly Dependency[];
@@ -25,6 +26,10 @@ export function parse_manifest(manifest: string): ActionManifest {
 
 	if (!raw.name) {
 		throw new Error("Failed to parse action manifest: missing or malformed version name.");
+	}
+
+	if (typeof raw.featured !== "boolean") {
+		raw.featured = false;
 	}
 
 	if (!Array.isArray(raw.files)) {

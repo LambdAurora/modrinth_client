@@ -33,5 +33,5 @@ export interface CreateVersion {
 	readonly game_versions?: readonly string[];
 	readonly loaders?: readonly string[];
 	readonly dependencies?: readonly VersionDependency[];
-	readonly featured?: boolean;
+	readonly featured: boolean;
 }

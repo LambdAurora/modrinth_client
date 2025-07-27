@@ -19,7 +19,7 @@ export class ModrinthClient {
 	constructor(private readonly token: string) {
 		this.headers = {
 			"User-Agent": "github.com:LambdAurora/modrinth_client",
-			TokenAuth: this.token,
+			Authorization: this.token,
 		};
 	}
 

@@ -63,6 +63,7 @@ const result = await client.create_version({
 	name: manifest.name,
 	version_type: manifest.type,
 	changelog: manifest.changelog,
+	featured: manifest.featured,
 	game_versions: manifest.game_versions,
 	loaders: manifest.loaders,
 	dependencies: manifest.dependencies.map((dependency) => ({

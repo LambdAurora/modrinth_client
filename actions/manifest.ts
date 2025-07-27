@@ -10,7 +10,7 @@ export interface ActionManifest {
 	readonly name: string;
 	readonly type: VersionType;
 	readonly changelog: string;
-	readonly feature: boolean;
+	readonly featured: boolean;
 	readonly game_versions?: readonly string[];
 	readonly loaders: readonly string[];
 	readonly dependencies: readonly Dependency[];

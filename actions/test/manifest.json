@@ -13,7 +13,7 @@
 	"dependencies": [
 		{
 			"type": "required",
-			"id": "fabric-api"
+			"project_id": "fabric-api"
 		}
 	],
 	"files": [

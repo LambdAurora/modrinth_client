@@ -63,6 +63,12 @@ const result = await client.create_version({
 	name: manifest.name,
 	version_type: manifest.type,
 	changelog: manifest.changelog,
+	game_versions: manifest.game_versions,
+	loaders: manifest.loaders,
+	dependencies: manifest.dependencies.map((dependency) => ({
+		dependency_type: dependency.type,
+		project_id: dependency.project_id,
+	})),
 }, files);
 
 if (result.status === "error") {

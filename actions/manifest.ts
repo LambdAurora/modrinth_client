@@ -1,4 +1,9 @@
-import { VERSION_TYPES, VersionType } from "../lib/enum.ts";
+import { DependencyType, VERSION_TYPES, VersionType } from "../lib/enum.ts";
+
+export interface Dependency {
+	readonly type: DependencyType;
+	readonly project_id: string;
+}
 
 export interface ActionManifest {
 	readonly version: string;
@@ -7,6 +12,7 @@ export interface ActionManifest {
 	readonly changelog: string;
 	readonly game_versions?: readonly string[];
 	readonly loaders: readonly string[];
+	readonly dependencies: readonly Dependency[];
 	readonly files: readonly string[];
 }
 
@@ -37,6 +43,20 @@ export function parse_manifest(manifest: string): ActionManifest {
 		raw.loaders = [raw.loaders];
 	} else if (!Array.isArray(raw.loaders)) {
 		throw new Error(`Failed to parse action manifest: malformed loaders array.`);
+	}
+
+	if (!raw.dependencies) {
+		raw.dependencies = [];
+	} else if (!Array.isArray(raw.dependencies)) {
+		throw new Error(`Failed to parse action manifest: malformed dependencies array.`);
+	} else {
+		raw.dependencies = (raw.dependencies as unknown[]).map((dependency, index) => {
+			if (typeof dependency !== "object") {
+				throw new Error(`Failed to parse action manifest: dependency at index ${index} is malformed.`);
+			} else {
+				return dependency as Dependency;
+			}
+		});
 	}
 
 	return raw;

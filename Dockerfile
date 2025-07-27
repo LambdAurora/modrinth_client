@@ -1,7 +1,6 @@
 FROM denoland/deno:latest
 WORKDIR /action
-COPY . .
+COPY deno.* .
 RUN deno install
-RUN deno check
-RUN deno task test
+COPY . .
 ENTRYPOINT ["deno", "run", "--allow-read", "--allow-net", "--allow-env=GH_INPUTS,NODE_V8_COVERAGE,JEST_WORKER_ID", "/action/actions/index.ts"]

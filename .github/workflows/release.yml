@@ -19,7 +19,7 @@ jobs:
         id: tag
         run: |
           if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-            tag=${GITHUB_REF#refs/tags/}
+            tag=${GITHUB_REF#refs/tags/v}
           else
             tag=$(cut -c 1-7 <<< $GITHUB_SHA)
           fi

@@ -1,5 +1,6 @@
 import { FILE_TYPES_MAP } from "../lib/constants.ts";
 import { ModrinthClient } from "../lib/index.ts";
+import { process_readme } from "../lib/readme_processor.ts";
 import { parse_manifest } from "./manifest.ts";
 import core from "@actions/core";
 import * as path from "@std/path";
@@ -81,7 +82,7 @@ core.setOutput("version-id", result.data.id);
 core.info(`\x1b[32m✔\x1b[0m Successfully uploaded version on Modrinth.\n\tID: ${result.data.id}`);
 
 if (readme) {
-	await client.update_project_body(inputs.project, readme);
+	await client.update_project_body(inputs.project, process_readme(readme));
 
 	core.info("\x1b[32m✔\x1b[0m Successfully updated project body on Modrinth.");
 }
